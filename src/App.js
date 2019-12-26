@@ -1,25 +1,20 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useReducer } from 'react';
+import {Provider} from './store';
+import reducer, {initialState} from './reducer';
+import styles from './app.module.css';
+import Filter from './components/Filter';
+import Hotels from './components/Hotels'
 
 function App() {
+  const state = useReducer(reducer, initialState);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider value={state}>
+      <div className={styles.container}>
+        <Filter />
+        <Hotels />
+      </div>
+    </Provider>
   );
 }
 

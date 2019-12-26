@@ -1,0 +1,16 @@
+.container {
+  margin: 0 auto;
+  font-size: 14px;
+  display: flex;
+  flex-wrap: wrap;
+  padding-top: 100px;
+  justify-content: center;
+  max-width: 1200px;
+  align-items: flex-start;
+}
+
+@media (min-width: 768px) {
+  .container {
+    font-size: 16px;
+  }
+}
