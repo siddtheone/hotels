@@ -25,6 +25,6 @@ export const testData = [{
 }].map((data, index) => ({
   ...data,
   location: 'Costa Adeje, Tenerife',
-  fromDate: Date.now() - (index * 1000000000),
+  fromDate: Date.now() - (index * 50000000),
   forDays: index + 1,
 }));

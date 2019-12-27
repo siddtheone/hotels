@@ -54,7 +54,16 @@ export const getDateFilter = state => state.dateFilter;
 export const getAirportFilter = state => state.airportFilter;
 
 export const getDeparturesFromHotels = createSelector(getHotels, hotels => hotels.map(e => e.departure));
-export const getHolidayDateFromHotels = createSelector(getHotels, hotels => hotels.map(e => ({value: e.fromDate, name: dateFormat(e.fromDate)})));
+export const getHolidayDateFromHotels = createSelector(getHotels, hotels => {
+  const days = [];
+  hotels.forEach(e => {
+    const df = dateFormat(e.fromDate);
+    if(days.findIndex(e => e.name === df) === -1) {
+      days.push({value: e.fromDate, name: df})
+    }
+  })
+  return days;
+});
 
 export const getHotelsSortBy = createSelector(getHotels, getSortBy,
   (hotels, sortBy) => {
@@ -69,7 +78,7 @@ export const getHotelsSortBy = createSelector(getHotels, getSortBy,
 export const getFilteredHotels = createSelector(getDateFilter, getAirportFilter, getHotelsSortBy, getSortBy,
   (date, airport, hotels) => {
     return hotels.filter(hotel => {
-      if(date > -1 && airport === '' && hotel.fromDate === date) {
+      if(date > -1 && airport === '' && dateFormat(hotel.fromDate) === dateFormat(date)) {
         return true;
       }
 
@@ -77,7 +86,7 @@ export const getFilteredHotels = createSelector(getDateFilter, getAirportFilter,
         return true;
       }
 
-      if(date > -1 && airport !== '' && hotel.fromDate === date && hotel.departure === airport) {
+      if(date > -1 && airport !== '' && dateFormat(hotel.fromDate) === dateFormat(date) && hotel.departure === airport) {
         return true;
       }
 
