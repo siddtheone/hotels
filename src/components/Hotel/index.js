@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from "prop-types";
 import {dateFormat} from '../../helpers/utils';
 import styles from './hotel.module.css';
 
@@ -44,5 +45,24 @@ const Hotel =  ({
     </div>
   );
 }
+
+Hotel.propTypes = {
+  imageIndex: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired,
+  location: PropTypes.string.isRequired,
+  rating: PropTypes.number.isRequired,
+  guestList: PropTypes.shape({
+    adults: PropTypes.number.isRequired,
+    children: PropTypes.number.isRequired,
+    infants: PropTypes.number.isRequired
+  }),
+  fromDate: PropTypes.number.isRequired,
+  forDays: PropTypes.number.isRequired,
+  departure: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
+  description: PropTypes.string.isRequired,
+  expanded: PropTypes.bool.isRequired,
+  onToggle: PropTypes.func.isRequired
+};
 
 export default Hotel;
